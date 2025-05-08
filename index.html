@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ua">
+    <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial scale=1.0">
+         <title>Створення користувача</title>
+    </head>
+    <body>
+        <script>
+            function createNewUser(){
+                const firstName = prompt("Введіть ім'я користувача:");
+                const lastName = prompt("Введіть прізвище користувача:");
+
+                const newUser = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    getLogin: function() {
+                        return this.firstName.charAt(0).toLowerCase() + this.lastName.toLowerCase();
+                    }
+                };
+                return newUser;
+            }
+
+            const user = createNewUser();
+            const login = user.getLogin();
+            console.log("Логін користувача:", login);
+
+            function createNewSecureUser() {
+                let firstName;
+                let lastName;
+
+                function askName() {
+                    firstName = prompt("Введіть ім'я користувача:");
+                    lastName = prompt("Введіть прізвище користувача:");
+                }
+
+                askName();
+
+                return {
+                    getFirstName: function() {
+                        return firstName;
+                    },
+                    getLastName: function() {
+                        return lastName;
+                    },
+                    setFirstName: function(newFirstName) {
+                        firstName = newFirstName;
+                    },
+                    setLastName: function(newLastName) {
+                        lastName = newLastName;
+                    },
+                    getLogin: function() {
+                        return firstName.charAt(0).toLowerCase() + lastName.toLowerCase();
+                    }
+                };
+            }
+
+            const secureUser = createNewSecureUser();
+            console.log("Ім'я корситувача:", secureUser.getFirstName());
+            console.log("Прізвище корситувача:", secureUser.getLastName());
+            console.log("Логін корситувача:", secureUser.getLogin());
+
+            secureUser.setFirstName("Іван");
+            secureUser.setLastName("Золо");
+            console.log("Оновлене ім'я:", secureUser.getFirstName());
+            console.log("Оновлене прізвище:", secureUser.getLastName());
+            console.log("Оновлений логін:", secureUser.getLogin());
+        </script>
+    </body>
+</html>
